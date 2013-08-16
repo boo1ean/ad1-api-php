@@ -1,8 +1,5 @@
 <?php namespace Ad1;
 
-require '../vendor/autoload.php';
-require 'Resolver.php';
-
 use Guzzle\Http\ClientInterface;
 use Guzzle\Http\Client;
 
@@ -56,6 +53,14 @@ class Ad1
 		$this->setDefaultAdapter();
 	}
 
+	/**
+	 * Proxy for API methods defined in methods map property
+	 * @param string $name method alias
+	 * @param array $args method args
+	 * @return array API response
+	 * @throws BadMethodCallException if method doesn't exist
+	 * @throws InvalidArgumentException for wrong args
+	 */
 	public function __call($name, $args) {
 		if (!array_key_exists($name, $this->methods)) {
 			throw new \BadMethodCallException(sprintf('Method %s does not exist.', $name));
@@ -69,11 +74,6 @@ class Ad1
 		return $this->resolver->resolve($this->methods[$name], $params);
 	}
 
-	protected function get($url) {
-		$response = $this->adapter->get($url)->send();
-		var_dump($response->json());
-	}
-
 	/**
 	 * Set HTTP adapter
 	 * @param Guzzle\Http\ClientInterface $adapter instance of http client
@@ -83,7 +83,7 @@ class Ad1
 	}
 
 	/**
- 	 * Set default http adapter Guzzle\Http\Client
+	 * Set default http adapter Guzzle\Http\Client
 	 */
 	public function setDefaultAdapter() {
 		$this->setAdapter(new Client());

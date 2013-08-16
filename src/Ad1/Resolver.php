@@ -52,7 +52,8 @@ class Resolver
 	 * @return string query url
 	 */
 	public function composeQuery($options, $params) {
-		$url = sprintf(static::ENDPOINT, $options['method'], $this->key);
-		return $url;
+		$url   = sprintf(static::ENDPOINT, $options['method'], $this->key);
+		$query = '&' . http_build_query($params);
+		return $url . $query;
 	}
 }
