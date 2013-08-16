@@ -1,0 +1,13 @@
+{
+	"name": "boo1ean/ad1",
+	"description": "Wrapper for ad1 API.",
+	"authors": [
+		{
+			"name": "Egor Gumenyuk",
+			"email": "boo1ean0807@gmail.com"
+		}
+	],
+	"require": {
+
+	}
+}
