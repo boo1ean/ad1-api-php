@@ -66,7 +66,7 @@ class Ad1
 			throw new \BadMethodCallException(sprintf('Method %s does not exist.', $name));
 		}
 
-		$params = reset($args);
+		$params = reset($args) ?: array();
 		if ($params && !is_array($params)) {
 			throw new \InvalidArgumentException('Request params must be an array.');
 		}
